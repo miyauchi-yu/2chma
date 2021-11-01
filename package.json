@@ -1,0 +1,34 @@
+{
+  "name": "2chma",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.0.16",
+    "@chakra-ui/react": "^1.6.10",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "framer-motion": "^5.0.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "moment": "^2.29.1",
+    "next": "12.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "rss": "^1.2.2",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.6",
+    "@types/react": "17.0.33",
+    "@types/xml2js": "^0.4.9",
+    "eslint": "7",
+    "eslint-config-next": "12.0.1",
+    "feed": "^4.2.2",
+    "typescript": "4.4.4"
+  }
+}
