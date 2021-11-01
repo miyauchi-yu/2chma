@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }: GetServerS
 
 const generateFeedXml = async () => {
     // 登録済みサイト情報の取得
-    const fileContents = fs.readFileSync('./public/data/sites', 'utf8')
+    const fileContents = fs.readFileSync(process.cwd() + '/public/data/sites', 'utf8')
     const siteArray = fileContents.split('\n')
 
     // 外部サイトのRSS取得
