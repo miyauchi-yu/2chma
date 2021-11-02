@@ -26,11 +26,11 @@ const Home: NextPage = ({ items }: InferGetStaticPropsType<typeof getStaticProps
                             margin="2"
                             overflow="hidden"
                         >
-                            <Box display="block" h="290px" bgColor="black" overflow="hidden">
-                                <Link href={item.link} isExternal>
+                            <Link href={item.link} isExternal>
+                                <Box display="block" h="290px" bgColor="black" overflow="hidden">
                                     <Image src={item.image} className={styles.image_position} alt={item.title} title={item.title} />
-                                </Link>
-                            </Box>
+                                </Box>
+                            </Link>
                             <Box display="block" p="3" alignItems="baseline">
                                 <Box
                                     mt="1"
