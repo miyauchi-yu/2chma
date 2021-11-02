@@ -17,6 +17,10 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
             <Head>
                 <title>{title}</title>
                 <meta name="description" content={description} />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+                <meta httpEquiv="Pragma" content="no-cache" />
+                <meta httpEquiv="Cache-Control" content="no-cache" />
+                <meta httpEquiv="Expires" content="0" />
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
 
