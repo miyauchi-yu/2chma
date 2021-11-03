@@ -7,7 +7,8 @@ type Res = {
 
 const AddSiteInfo = (req: NextApiRequest, res: NextApiResponse<Res>) => {
     const url = req.query.url
-    fs.writeFileSync('./public/data/sites', url as string)
+    const data = '\n' + url
+    fs.appendFileSync('./public/data/sites', data)
     res.status(200).json({ success: 0 })
 }
 

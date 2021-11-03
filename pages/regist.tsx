@@ -69,7 +69,7 @@ const validateUrl = async (e: FormEvent<HTMLFormElement>) => {
     // URL登録
     const result = await fetch('api/addSiteInfo?url=' + inputUrl)
     const success = await result.json()
-    if (success === 0) {
+    if (success.success === 0) {
         alert('サイト登録が完了しました。')
     } else {
         alert('サイト登録に失敗しました。')
