@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /regist
+Disallow: /feed
+
+Sitemap: https://2chma.vercel.app/sitemap.xml
