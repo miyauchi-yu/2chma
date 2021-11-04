@@ -21,6 +21,7 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
                 <meta httpEquiv="Pragma" content="no-cache" />
                 <meta httpEquiv="Cache-Control" content="no-cache" />
                 <meta httpEquiv="Expires" content="0" />
+                <meta name="google-site-verification" content="36nntOsoj0jgQ6EgddCRpI2nPG3g0AFHatMQJDVg3lg" />
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
 
