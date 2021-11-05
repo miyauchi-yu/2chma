@@ -34,11 +34,18 @@ const generateFeedXml = async () => {
     }
 
     // 日付で降順ソート
-    const items = JSON.parse(JSON.stringify(objArray))
+    let items = JSON.parse(JSON.stringify(objArray))
     items.sort((a: { updated: number }, b: { updated: number }) => {
         if (a.updated < b.updated) return 1
         if (a.updated > b.updated) return -1
         return 0
+    })
+
+    // dispIdを付加
+    let dispId: number = 0
+    items = items.map((item: { dispId: number }) => {
+        item.dispId = ++dispId
+        return item
     })
 
     // RSS feed生成
@@ -51,11 +58,11 @@ const generateFeedXml = async () => {
         copyright: 'All rights reserved',
         updated: new Date()
     })
-    items?.forEach((item: { title: any; updated: string | number | Date; link: any }) => {
+    items?.forEach((item: { title: any; updated: string | number | Date; dispId: number }) => {
         feed.addItem({
             title: item.title,
             date: new Date(item.updated),
-            link: item.link
+            link: process.env.WEBAPP_URL + '?dispId=' + item.dispId
         })
     })
 
@@ -65,11 +72,10 @@ const generateFeedXml = async () => {
 const getArticles = async (url: string) => {
     const xml = await fetchXML(url)
     const parsedXml = await XMLParser.parseStringPromise(xml).catch(null)
-    const articles = parsedXml['rdf:RDF'].item.map((article: { [x: string]: { toString: () => any }[]; title: { toString: () => any }[]; link: { toString: () => any }[] }) => {
+    const articles = parsedXml['rdf:RDF'].item.map((article: { [x: string]: { toString: () => any }[]; title: { toString: () => any }[] }) => {
         return {
             title: article.title.toString(),
-            link: article.link.toString(),
-            updated: article['dc:date'][0].toString(),
+            updated: article['dc:date'][0].toString()
         }
     })
     return articles
