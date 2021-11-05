@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next'
+import type { NextPage, GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Layout from './components/layout'
 import { Box, Image, Link } from "@chakra-ui/react"
 import React from 'react'
@@ -8,7 +8,7 @@ import moment from 'moment'
 import fs from 'fs'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = ({ items }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home: NextPage = ({ items }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
         <Layout
             title="2chまとめのアンテナ"
@@ -56,7 +56,7 @@ const Home: NextPage = ({ items }: InferGetStaticPropsType<typeof getStaticProps
     )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }: GetServerSidePropsContext) => {
     // 登録済みサイト情報の取得
     const fileContents = fs.readFileSync('./public/data/sites', 'utf8')
     const siteArray = fileContents.split('\n')
@@ -81,8 +81,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
             items
-        },
-        revalidate: 3
+        }
     }
 }
 
