@@ -3,14 +3,14 @@ import fs from 'fs'
 import IsoFetch from 'isomorphic-unfetch'
 import XMLParser from 'xml2js'
 import { Feed } from 'feed'
+import { v4 } from 'uuid'
 
 export const getServerSideProps: GetServerSideProps = async ({ res }: GetServerSidePropsContext) => {
     // フィードのXMLを生成
     const xml = await generateFeedXml()
 
     res.statusCode = 200
-    // 24時間キャッシュ
-    res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate')
+    res.setHeader('Cache-Control', 'max-age=0')
     res.setHeader('Content-Type', 'text/xml')
     res.end(xml)
 
@@ -42,9 +42,8 @@ const generateFeedXml = async () => {
     })
 
     // dispIdを付加
-    let dispId: number = 0
-    items = items.map((item: { dispId: number }) => {
-        item.dispId = ++dispId
+    items = items.map((item: { dispId: string }) => {
+        item.dispId = v4()
         return item
     })
 
@@ -58,7 +57,7 @@ const generateFeedXml = async () => {
         copyright: 'All rights reserved',
         updated: new Date()
     })
-    items?.forEach((item: { title: any; updated: string | number | Date; dispId: number }) => {
+    items?.forEach((item: { title: any; updated: string | number | Date; dispId: string }) => {
         feed.addItem({
             title: item.title,
             date: new Date(item.updated),

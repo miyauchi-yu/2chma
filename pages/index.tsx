@@ -1,12 +1,14 @@
 import type { NextPage, GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Layout from './components/layout'
-import { Box, Image, Link } from "@chakra-ui/react"
 import React from 'react'
 import IsoFetch from 'isomorphic-unfetch'
 import XMLParser from 'xml2js'
 import moment from 'moment'
 import fs from 'fs'
+import { v4 } from 'uuid'
 import styles from '../styles/Home.module.css'
+
+const { Box, Image, Link } = require('@chakra-ui/react')
 
 const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
@@ -15,10 +17,10 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
             description="2chまとめサイトのアンテナサイトです。"
         >
             {React.Children.toArray(
-                items.map((item: { link: string | undefined; image: string | undefined; title: string | undefined; dispId: number; url: string | undefined; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; updated: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }) => {
+                items.map((item: { link: string | undefined; image: string | undefined; title: string | undefined; dispId: string; url: string | undefined; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; updated: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }) => {
                     return (
                         <Box
-                            key={item.title}
+                            key={item.dispId}
                             w="350px"
                             borderWidth="1px"
                             borderColor="silver"
@@ -37,7 +39,7 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
                                     fontWeight="semibold"
                                     as="h4"
                                     lineHeight="tight"
-                                    color={(reqDispId == item.dispId) ? "red" : "black"}
+                                    color={(reqDispId === item.dispId) ? "red" : "black"}
                                     isTruncated
                                 >
                                     <Link href={item.link} title={item.title} isExternal>{item.title}</Link>
@@ -86,9 +88,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
     })
 
     // dispIdを付加
-    let dispId: number = 0
-    items = items.map((item: { dispId: number }) => {
-        item.dispId = ++dispId
+    items = items.map((item: { dispId: string }) => {
+        item.dispId = v4()
         return item
     })
 

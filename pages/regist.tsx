@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import Layout from './components/layout'
-import {
+import { FormEvent } from 'react'
+
+const {
     FormControl,
     FormLabel,
     Input,
@@ -8,8 +10,7 @@ import {
     Button,
     Text,
     Link
-} from "@chakra-ui/react"
-import { FormEvent } from 'react'
+} = require('@chakra-ui/react')
 
 const Regist: NextPage = () => {
     return (

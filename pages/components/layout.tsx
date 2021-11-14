@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Flex, Box, Text } from '@chakra-ui/react'
 import React from 'react'
 import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
+
+const { Flex, Box, Text } = require('@chakra-ui/react')
 
 type Props = {
     children?: React.ReactNode
