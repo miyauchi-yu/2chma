@@ -41,8 +41,8 @@ const generateFeedXml = async () => {
     })
 
     // dispIdを付加
-    items = items.map((item: { title: string; dispId: string }) => {
-        item.dispId = item.title
+    items = items.map((item: { link: string; dispId: string }) => {
+        item.dispId = item.link
         return item
     })
 
@@ -70,9 +70,10 @@ const generateFeedXml = async () => {
 const getArticles = async (url: string) => {
     const xml = await fetchXML(url)
     const parsedXml = await XMLParser.parseStringPromise(xml).catch(null)
-    const articles = parsedXml['rdf:RDF'].item.map((article: { [x: string]: { toString: () => any }[]; title: { toString: () => any }[] }) => {
+    const articles = parsedXml['rdf:RDF'].item.map((article: { [x: string]: { toString: () => any }[]; title: { toString: () => any }[]; link: { toString: () => any }[] }) => {
         return {
             title: article.title.toString(),
+            link: article.link.toString(),
             updated: article['dc:date'][0].toString()
         }
     })
