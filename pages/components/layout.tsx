@@ -34,6 +34,11 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
                 </Box>
             </Flex>
 
+            <Box maxW="100%" align="center" marginTop="60px">
+                <a href="https://twitter.com/2chma2021?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-lang="ja" data-show-count="false">Follow @2chma2021</a>
+                <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+            </Box>
+
             <main className={styles.main}>{children}</main>
 
             <footer className={styles.footer}>

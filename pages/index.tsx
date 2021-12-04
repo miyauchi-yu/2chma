@@ -39,7 +39,7 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
                                     fontWeight="semibold"
                                     as="h4"
                                     lineHeight="tight"
-                                    color={(reqDispId === item.dispId) ? "red" : "black"}
+                                    color={(reqDispId === item.title) ? "red" : "black"}
                                     isTruncated
                                 >
                                     <Link href={item.link} title={item.title} isExternal>{item.title}</Link>

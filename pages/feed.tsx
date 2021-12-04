@@ -3,7 +3,6 @@ import fs from 'fs'
 import IsoFetch from 'isomorphic-unfetch'
 import XMLParser from 'xml2js'
 import { Feed } from 'feed'
-import { v4 } from 'uuid'
 
 export const getServerSideProps: GetServerSideProps = async ({ res }: GetServerSidePropsContext) => {
     // フィードのXMLを生成
@@ -42,8 +41,8 @@ const generateFeedXml = async () => {
     })
 
     // dispIdを付加
-    items = items.map((item: { dispId: string }) => {
-        item.dispId = v4()
+    items = items.map((item: { title: string; dispId: string }) => {
+        item.dispId = item.title
         return item
     })
 
