@@ -35,7 +35,7 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
             </Flex>
 
             <Box maxW="100%" align="center" marginTop="60px">
-                <a href="https://twitter.com/2chma2021?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-lang="ja" data-show-count="false">Follow @2chma2021</a>
+                <a href="https://twitter.com/2chma2021?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-lang="ja" data-show-count="true">Follow @2chma2021</a>
                 <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
             </Box>
 
@@ -44,7 +44,7 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
             <footer className={styles.footer}>
                 <nav>
                     <ul>
-                        <li><Link href="/regist">サイト登録</Link></li>
+                        {/* <li><Link href="/regist">サイト登録</Link></li> */}
                         <li><Link href="/feed">RSS</Link></li>
                     </ul>
                 </nav>
