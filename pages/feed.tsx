@@ -60,7 +60,7 @@ const generateFeedXml = async () => {
         feed.addItem({
             title: item.title,
             date: new Date(item.updated),
-            link: process.env.WEBAPP_URL + '?dispId=' + item.dispId
+            link: process.env.WEBAPP_URL + 'home?dispId=' + item.dispId
         })
     })
 

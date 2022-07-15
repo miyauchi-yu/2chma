@@ -10,9 +10,10 @@ type Props = {
     children?: React.ReactNode
     title?: string
     description?: string
+    flexFlg?: boolean
 }
 
-const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
+const Layout: NextPage<Props> = ({ children, title, description, flexFlg }: Props) => {
     return (
         <>
             <Head>
@@ -29,7 +30,7 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
             <Flex>
                 <Box flex="1" maxW="100%" borderBottomWidth="1px" borderBottomColor="silver">
                     <Text fontSize="xl" margin="10px" fontWeight="bold">
-                        <Link href="/">2chまとめのアンテナ</Link>
+                        <Link href="/home">2chまとめのアンテナ</Link>
                     </Text>
                 </Box>
             </Flex>
@@ -39,12 +40,13 @@ const Layout: NextPage<Props> = ({ children, title, description }: Props) => {
                 <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
             </Box>
 
-            <main className={styles.main}>{children}</main>
+            <main className={(flexFlg) ? styles.main : styles.sub_main}>{children}</main>
 
             <footer className={styles.footer}>
                 <nav>
                     <ul>
                         {/* <li><Link href="/regist">サイト登録</Link></li> */}
+                        <li><Link href="/access">アクセスランキング</Link></li>
                         <li><Link href="/feed">RSS</Link></li>
                     </ul>
                 </nav>

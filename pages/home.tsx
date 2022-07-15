@@ -15,6 +15,7 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
         <Layout
             title="2chまとめのアンテナ"
             description="2chまとめサイトのアンテナサイトです。"
+            flexFlg={true}
         >
             {React.Children.toArray(
                 items.map((item: { link: string | undefined; image: string | undefined; title: string | undefined; dispId: string; url: string | undefined; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; updated: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }) => {
@@ -59,9 +60,18 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    // 遷移元URLの取得
+    let referer = context.req.headers.referer;
+    if (referer === undefined) {
+        referer = 'null'
+    }
+
+    // アクセス情報追加APIの呼び出し
+    const result = await fetch(process.env.WEBAPP_URL + 'api/addAccessInfo?url=' + referer)
+
     // クエリパラメータのdispIdを取得
-    let reqDispId = query.dispId
+    let reqDispId = context.query.dispId
     if (reqDispId === undefined) {
         reqDispId = 'null'
     }

@@ -12,6 +12,15 @@
   align-items: center;
 }
 
+.sub_main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
 .footer {
   display: flex;
   flex: 1;
