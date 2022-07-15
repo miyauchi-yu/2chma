@@ -10,23 +10,17 @@ const AddAccessInfo = (req: NextApiRequest, res: NextApiResponse<Res>) => {
     const data = url + '\n'
 
     // アクセス情報ファイルが存在しない場合
-    //if (!fs.existsSync(process.cwd() + '/public/data/access')) {
-    if (!fs.existsSync('/tmp/access')) {
+    if (!fs.existsSync(process.env.ROOT_DIR + 'tmp/access')) {
         // アクセス情報ファイルを作成
-        //fs.writeFileSync(process.cwd() + '/public/data/access', '')
-        fs.writeFileSync('/tmp/access', '')
+        fs.writeFileSync(process.env.ROOT_DIR + 'tmp/access', '')
         // ファイルパーミッションの変更
-        // fs.chmod(process.cwd() + '/public/data/access', 0o777, (err) => {
-        //     if (err) throw err
-        // })
-        fs.chmod('/tmp/access', 0o777, (err) => {
+        fs.chmod(process.env.ROOT_DIR + 'tmp/access', 0o777, (err) => {
             if (err) throw err
         })
     }
 
     // アクセス情報ファイルへ書き込み
-    // fs.appendFileSync(process.cwd() + '/public/data/access', data)
-    fs.appendFileSync('/tmp/access', data)
+    fs.appendFileSync(process.env.ROOT_DIR + 'tmp/access', data)
 
     res.status(200).json({ success: 0 })
     res.status(200).end()
