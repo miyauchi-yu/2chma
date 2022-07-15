@@ -16,7 +16,7 @@ const AddAccessInfo = (req: NextApiRequest, res: NextApiResponse<Res>) => {
     }
 
     // アクセス情報ファイルへ書き込み
-    fs.appendFileSync(process.cwd() + '/public/data/access', data)
+    fs.appendFileSync(process.cwd() + '/public/data/access', data, {flag: "a"})
 
     res.status(200).json({ success: 0 })
     res.status(200).end()
