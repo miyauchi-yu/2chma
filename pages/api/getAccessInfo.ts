@@ -10,7 +10,7 @@ const GetAccessInfo = (req: NextApiRequest, res: NextApiResponse<Data>) => {
     const accessRankingInfoArray: Array<object> = []
 
     // アクセス情報ファイルの読み込み
-    const fileContents = fs.readFileSync(process.env.WEBAPP_URL + 'data/access', 'utf8')
+    const fileContents = fs.readFileSync('public/data/access', 'utf8')
     const accessRowArray = fileContents.split('\n')
 
     // アクセス情報ファイルが空ファイルの場合
