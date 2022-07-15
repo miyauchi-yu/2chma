@@ -12,14 +12,15 @@ const AddAccessInfo = (req: NextApiRequest, res: NextApiResponse<Res>) => {
     // アクセス情報ファイルが存在しない場合
     if (!fs.existsSync(process.cwd() + '/public/data/access')) {
         // アクセス情報ファイルを作成
-        fs.writeFileSync(process.cwd() + '/public/data/access', '', {flag: "a"})
+        fs.writeFileSync(process.cwd() + '/public/data/access', '')
+        // ファイルパーミッションの変更
+        fs.chmod(process.cwd() + '/public/data/access', 0o777, (err) => {
+            if (err) throw err
+        })
     }
 
     // アクセス情報ファイルへ書き込み
-    fs.chmod(process.cwd() + '/public/data/access', 0o777, (err) => {
-        if (err) throw err
-    })
-    fs.appendFileSync(process.cwd() + '/public/data/access', data, {flag: "a"})
+    fs.appendFileSync(process.cwd() + '/public/data/access', data)
 
     res.status(200).json({ success: 0 })
     res.status(200).end()
