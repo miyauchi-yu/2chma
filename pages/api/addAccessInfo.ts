@@ -12,7 +12,7 @@ const AddAccessInfo = (req: NextApiRequest, res: NextApiResponse<Res>) => {
     // アクセス情報ファイルが存在しない場合
     if (!fs.existsSync(process.cwd() + '/public/data/access')) {
         // アクセス情報ファイルを作成
-        fs.writeFileSync(process.cwd() + '/public/data/access', '')
+        fs.writeFileSync(process.cwd() + '/public/data/access', '', {flag: "a"})
     }
 
     // アクセス情報ファイルへ書き込み
