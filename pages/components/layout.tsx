@@ -24,6 +24,7 @@ const Layout: NextPage<Props> = ({ children, title, description, flexFlg }: Prop
                 <meta httpEquiv="Cache-Control" content="no-cache" />
                 <meta httpEquiv="Expires" content="0" />
                 <meta name="google-site-verification" content="36nntOsoj0jgQ6EgddCRpI2nPG3g0AFHatMQJDVg3lg" />
+                <script data-ad-client="ca-pub-8322818341292998" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
 
