@@ -15,7 +15,7 @@ const GetAccessInfo = (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     // アクセス情報ファイルが空ファイルの場合
     if (accessRowArray[0] === '') {
-        for (let i=0; i<20; i++) {
+        for (let i = 0; i < 20; i++) {
             accessRankingInfoArray.push({name: '-', count: 0})
         }
     } else {

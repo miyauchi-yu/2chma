@@ -1,4 +1,5 @@
 import type { NextPage, GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { Box, Image, Link } from '@chakra-ui/react'
 import Layout from './components/layout'
 import React from 'react'
 import IsoFetch from 'isomorphic-unfetch'
@@ -8,7 +9,7 @@ import fs from 'fs'
 import { v4 } from 'uuid'
 import styles from '../styles/Home.module.css'
 
-const { Box, Image, Link } = require('@chakra-ui/react')
+//const { Box, Image, Link } = require('@chakra-ui/react')
 
 const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
@@ -29,7 +30,7 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
                             margin="2"
                             overflow="hidden"
                         >
-                            <Link href={item.link} isExternal>
+                            <Link href={item.link} onClick={e => addPopularInfo(e)}>
                                 <Box display="block" h="290px" bgColor="black" overflow="hidden">
                                     <Image src={item.image} className={styles.image_position} alt={item.title} title={item.title} />
                                 </Box>
@@ -43,10 +44,10 @@ const Home: NextPage = ({ items, reqDispId }: InferGetServerSidePropsType<typeof
                                     color={(reqDispId === item.link) ? "red" : "black"}
                                     isTruncated
                                 >
-                                    <Link href={item.link} title={item.title} isExternal>{item.title}</Link>
+                                    <Link href={item.link} title={item.title} onClick={e => addPopularInfo(e)}>{item.title}</Link>
                                 </Box>
                                 <Box color="gray.500" fontWeight="semibold" fontSize="xs">
-                                    <Link href={item.url} isExternal>{item.name}</Link>
+                                    <Link href={item.url}>{item.name}</Link>
                                 </Box>
                                 <Box color="gray.500" fontSize="xs">
                                     {item.updated}
@@ -68,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
 
     // アクセス情報追加APIの呼び出し
-    const result = await fetch(process.env.WEBAPP_URL + 'api/addAccessInfo?url=' + referer)
+    await fetch(process.env.WEBAPP_URL + 'api/addAccessInfo?url=' + referer)
 
     // クエリパラメータのdispIdを取得
     let reqDispId = context.query.dispId
@@ -144,6 +145,17 @@ const fetchXML = async (url: string) => {
     const response = await IsoFetch(url)
     const xml = await response.text()
     return xml
+}
+
+const addPopularInfo = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault()
+    const href = e.currentTarget.href
+
+    // 人気記事情報追加APIの呼び出し
+    await fetch('api/addPopularInfo?url=' + href)
+
+    // 画面遷移
+    window.location.href = href
 }
 
 export default Home

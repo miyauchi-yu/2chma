@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
 
     // アクセス情報追加APIの呼び出し
-    const result = await fetch(process.env.WEBAPP_URL + 'api/addAccessInfo?url=' + referer)
+    await fetch(process.env.WEBAPP_URL + 'api/addAccessInfo?url=' + referer)
 
     return {
         props: {

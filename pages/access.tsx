@@ -1,7 +1,8 @@
 import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Box, List, ListItem, Flex, Text, Spacer } from '@chakra-ui/react'
 import Layout from './components/layout'
 
-const { Box, List, ListItem, Flex, Text, Spacer } = require('@chakra-ui/react')
+//const { Box, List, ListItem, Flex, Text, Spacer } = require('@chakra-ui/react')
 
 const Access: NextPage = ({ items }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return (
