@@ -21,6 +21,7 @@ const GetPopularInfo = async (req: NextApiRequest, res: NextApiResponse<Data>) =
     if (!fs.existsSync(process.env.ROOT_DIR + 'tmp/popular')) {
         res.status(200).json({ popularRankingInfo: JSON.parse(JSON.stringify(popularRankingInfoArray)) })
         res.status(200).end()
+        return
     }
     
     // 人気記事情報ファイルの読み込み
@@ -31,6 +32,7 @@ const GetPopularInfo = async (req: NextApiRequest, res: NextApiResponse<Data>) =
     if (popularRowArray[0] === '') {
         res.status(200).json({ popularRankingInfo: JSON.parse(JSON.stringify(popularRankingInfoArray)) })
         res.status(200).end()
+        return
     }
 
     // 重複削除

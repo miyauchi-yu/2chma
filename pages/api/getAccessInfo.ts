@@ -16,6 +16,7 @@ const GetAccessInfo = (req: NextApiRequest, res: NextApiResponse<Data>) => {
         }
         res.status(200).json({ accessRankingInfo: JSON.parse(JSON.stringify(accessRankingInfoArray)) })
         res.status(200).end()
+        return
     }
 
     // アクセス情報ファイルの読み込み
