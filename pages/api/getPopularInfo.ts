@@ -17,6 +17,12 @@ const GetPopularInfo = async (req: NextApiRequest, res: NextApiResponse<Data>) =
     // 人気記事ランキング情報配列
     const popularRankingInfoArray: Array<PopularRankingInfo> = []
 
+    // 人気記事情報ファイルが存在しない場合
+    if (!fs.existsSync(process.env.ROOT_DIR + 'tmp/popular')) {
+        res.status(200).json({ popularRankingInfo: JSON.parse(JSON.stringify(popularRankingInfoArray)) })
+        res.status(200).end()
+    }
+    
     // 人気記事情報ファイルの読み込み
     const fileContents1 = fs.readFileSync(process.env.ROOT_DIR + 'tmp/popular', 'utf8')
     const popularRowArray = fileContents1.split('\n')

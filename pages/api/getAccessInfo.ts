@@ -9,6 +9,15 @@ const GetAccessInfo = (req: NextApiRequest, res: NextApiResponse<Data>) => {
     // アクセスランキング情報配列
     const accessRankingInfoArray: Array<object> = []
 
+    // アクセス情報ファイルが存在しない場合
+    if (!fs.existsSync(process.env.ROOT_DIR + 'tmp/access')) {
+        for (let i = 0; i < 20; i++) {
+            accessRankingInfoArray.push({name: '-', count: 0})
+        }
+        res.status(200).json({ accessRankingInfo: JSON.parse(JSON.stringify(accessRankingInfoArray)) })
+        res.status(200).end()
+    }
+
     // アクセス情報ファイルの読み込み
     const fileContents = fs.readFileSync(process.env.ROOT_DIR + 'tmp/access', 'utf8')
     const accessRowArray = fileContents.split('\n')

@@ -1,7 +1,7 @@
-import type { NextPage, GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import type { NextPage } from 'next'
 import Head from 'next/head'
 
-const Index: NextPage = ({ referer }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Index: NextPage = () => {
     return (
         <>
             <Head>
@@ -11,23 +11,6 @@ const Index: NextPage = ({ referer }: InferGetServerSidePropsType<typeof getServ
             </Head>
         </>
     )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-    // 遷移元URLの取得
-    let referer = context.req.headers.referer;
-    if (referer === undefined) {
-        referer = 'null'
-    }
-
-    // アクセス情報追加APIの呼び出し
-    await fetch(process.env.WEBAPP_URL + 'api/addAccessInfo?url=' + referer)
-
-    return {
-        props: {
-            referer
-        }
-    }
 }
 
 export default Index
