@@ -9,6 +9,7 @@ const Access: NextPage = ({ items }: InferGetServerSidePropsType<typeof getServe
         <Layout
             title="アクセスランキング | 2chまとめのアンテナ"
             description="2chまとめのアンテナのアクセスランキングです。"
+            subTitle="アクセスランキング"
             flexFlg={false}
         >
             <Box
@@ -17,9 +18,6 @@ const Access: NextPage = ({ items }: InferGetServerSidePropsType<typeof getServe
                 marginRight="3rem"
             >
                 <List>
-                    <ListItem>
-                        <Text fontWeight="bold">アクセスランキング</Text>
-                    </ListItem>
                     <ListItem
                         borderTop="1px solid silver"
                         borderLeft="1px solid silver"

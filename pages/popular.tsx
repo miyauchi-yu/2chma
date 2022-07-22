@@ -10,6 +10,7 @@ const Popular: NextPage = ({ items }: InferGetServerSidePropsType<typeof getServ
         <Layout
             title="人気記事ランキング | 2chまとめのアンテナ"
             description="2chまとめのアンテナの人気記事ランキングです。"
+            subTitle="人気記事ランキング"
             flexFlg={true}
         >
             {items.map((item: {

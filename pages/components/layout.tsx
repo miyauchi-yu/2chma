@@ -11,10 +11,11 @@ type Props = {
     children?: React.ReactNode
     title?: string
     description?: string
+    subTitle?: string
     flexFlg?: boolean
 }
 
-const Layout: NextPage<Props> = ({ children, title, description, flexFlg }: Props) => {
+const Layout: NextPage<Props> = ({ children, title, description, subTitle, flexFlg }: Props) => {
     return (
         <>
             <Head>
@@ -42,6 +43,9 @@ const Layout: NextPage<Props> = ({ children, title, description, flexFlg }: Prop
                 <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
             </Box>
 
+            <Box maxW="100%" align="center" marginTop="60px">
+                <Text fontWeight="bold" fontSize="lg">{subTitle}</Text>
+            </Box>
             <main className={(flexFlg) ? styles.main : styles.sub_main}>{children}</main>
 
             <footer className={styles.footer}>
