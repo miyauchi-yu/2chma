@@ -52,6 +52,7 @@ const Layout: NextPage<Props> = ({ children, title, description, subTitle, flexF
                 <nav>
                     <ul>
                         {/* <li><Link href="/regist">サイト登録</Link></li> */}
+                        <li><Link href="/info">当サイトについて</Link></li>
                         <li><Link href="/access">アクセスランキング</Link></li>
                         <li><Link href="/popular">人気記事ランキング</Link></li>
                         <li><Link href="/feed">RSS</Link></li>
