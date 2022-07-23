@@ -1,4 +1,5 @@
 import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { isMobile } from 'react-device-detect'
 import Head from 'next/head'
 
 const Index: NextPage = ({}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -17,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         redirect: {
             permanent: false,
-            destination: '/home'
+            destination: (isMobile) ? '/new' : '/home'
         }
     }
 }

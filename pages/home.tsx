@@ -3,6 +3,7 @@ import { Box, Image, Link, Flex, Text, List, ListItem, Spacer } from '@chakra-ui
 import Layout from './components/layout'
 import React from 'react'
 import { ReactNode } from 'react'
+import { isMobile } from 'react-device-detect'
 import styles from '../styles/Home.module.css'
 
 //const { Box, Image, Link } = require('@chakra-ui/react')
@@ -59,7 +60,7 @@ const Home: NextPage = ({ items, items2, items3, reqDispId }: InferGetServerSide
                         )
                     })}
                 </Box>
-                <Box w="365px">
+                <Box w="800px">
                     <Box maxW="100%" align="center">
                         <Text fontWeight="bold" fontSize="lg">最新記事</Text>
                     </Box>
@@ -74,36 +75,38 @@ const Home: NextPage = ({ items, items2, items3, reqDispId }: InferGetServerSide
                         return (
                             <Box
                                 key={item.link}
-                                w="350px"
+                                maxW="100%"
                                 borderWidth="1px"
                                 borderColor="silver"
                                 borderRadius="lg"
                                 margin="2"
+                                padding="2"
                                 overflow="hidden"
                             >
-                                <Link href={item.link} onClick={e => addPopularInfo(e)}>
-                                    <Box display="block" h="290px" bgColor="black" overflow="hidden">
-                                        <Image src={item.image} className={styles.image_position} alt={item.title} title={item.title} />
+                                <Flex>
+                                    <Link href={item.link} onClick={e => addPopularInfo(e)}>
+                                        <Box display="block" w="200px" h="140px" bgColor="black" overflow="hidden">
+                                            <Image src={item.image} className={styles.image_position} alt={item.title} title={item.title} />
+                                        </Box>
+                                    </Link>
+                                    <Box paddingLeft="3" alignItems="baseline" maxW="100%">
+                                        <Box
+                                            mt="1"
+                                            fontWeight="semibold"
+                                            as="h4"
+                                            lineHeight="tight"
+                                            color={(reqDispId === item.link) ? "red" : "black"}
+                                        >
+                                            <Link href={item.link} title={item.title} onClick={e => addPopularInfo(e)}>{item.title}</Link>
+                                        </Box>
+                                        <Box color="gray.500" fontWeight="semibold" fontSize="xs">
+                                            <Link href={item.url}>{item.name}</Link>
+                                        </Box>
+                                        <Box color="gray.500" fontSize="xs">
+                                            {item.updated}
+                                        </Box>
                                     </Box>
-                                </Link>
-                                <Box display="block" p="3" alignItems="baseline">
-                                    <Box
-                                        mt="1"
-                                        fontWeight="semibold"
-                                        as="h4"
-                                        lineHeight="tight"
-                                        color={(reqDispId === item.link) ? "red" : "black"}
-                                        isTruncated
-                                    >
-                                        <Link href={item.link} title={item.title} onClick={e => addPopularInfo(e)}>{item.title}</Link>
-                                    </Box>
-                                    <Box color="gray.500" fontWeight="semibold" fontSize="xs">
-                                        <Link href={item.url}>{item.name}</Link>
-                                    </Box>
-                                    <Box color="gray.500" fontSize="xs">
-                                        {item.updated}
-                                    </Box>
-                                </Box>
+                                </Flex>
                             </Box>
                         )
                     })}
@@ -188,6 +191,10 @@ const Home: NextPage = ({ items, items2, items3, reqDispId }: InferGetServerSide
                         </ListItem>
                         {/* You can also use custom icons from react-icons */}
                     </List>
+                    <Box padding="10px" align="center">
+                        <a href="https://twitter.com/2chma2021?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-lang="ja" data-show-count="true">Follow @2chma2021</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+                    </Box>
                 </Box>
             </Flex>
         </Layout>
@@ -208,6 +215,16 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     let reqDispId = context.query.dispId
     if (reqDispId === undefined) {
         reqDispId = 'null'
+    }
+
+    // モバイルアクセスの場合、リダイレクト
+    if (isMobile) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/new'
+            }
+        }
     }
 
     // RSS情報取得APIの呼び出し
