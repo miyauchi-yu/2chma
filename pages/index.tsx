@@ -1,5 +1,4 @@
-import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { isMobile } from 'react-device-detect'
+import type { NextPage, GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 
 const Index: NextPage = ({}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -14,11 +13,11 @@ const Index: NextPage = ({}: InferGetServerSidePropsType<typeof getServerSidePro
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     return {
         redirect: {
             permanent: false,
-            destination: (isMobile) ? '/new' : '/home'
+            destination: (context.req.headers['user-agent']?.toString().match(/iPhone|Android.+Mobile/)) ? '/new' : '/home'
         }
     }
 }

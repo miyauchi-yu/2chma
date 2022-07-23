@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import Link from 'next/link'
 import { Flex, Box, Text } from '@chakra-ui/react'
 import styles from '../../styles/Home.module.css'
@@ -34,7 +33,7 @@ const Layout: NextPage<Props> = ({ children, title, description, subTitle, flexF
             <Flex maxW="100%" borderBottomWidth="1px" borderBottomColor="silver">
                 <Box flex="1">
                     <Text fontSize="xl" margin="10px" fontWeight="bold">
-                        <Link href={(isMobile) ? "/new" : "/home"}>2chまとめのアンテナ</Link>
+                        <Link href="/home">2chまとめのアンテナ</Link>
                     </Text>
                 </Box>
             </Flex>

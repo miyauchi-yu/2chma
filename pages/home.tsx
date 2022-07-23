@@ -3,7 +3,6 @@ import { Box, Image, Link, Flex, Text, List, ListItem, Spacer } from '@chakra-ui
 import Layout from './components/layout'
 import React from 'react'
 import { ReactNode } from 'react'
-import { isMobile } from 'react-device-detect'
 import styles from '../styles/Home.module.css'
 
 //const { Box, Image, Link } = require('@chakra-ui/react')
@@ -218,7 +217,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
 
     // モバイルアクセスの場合、リダイレクト
-    if (isMobile) {
+    if (context.req.headers['user-agent']?.toString().match(/iPhone|Android.+Mobile/)) {
         return {
             redirect: {
                 permanent: false,
