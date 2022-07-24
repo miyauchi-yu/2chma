@@ -59,7 +59,7 @@ const Home: NextPage = ({ items, items2, items3, reqDispId }: InferGetServerSide
                         )
                     })}
                 </Box>
-                <Box w="800px">
+                <Box w="40vw">
                     <Box maxW="100%" align="center">
                         <Text fontWeight="bold" fontSize="lg">最新記事</Text>
                     </Box>
